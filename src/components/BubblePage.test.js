@@ -38,9 +38,6 @@ test("Renders appropriate number of colors passed in through mock", async ()=> {
         },
     ]);
 
-    // const colors = await screen.findAllByTestId('color');
-    // console.log(colors)
-
-
+    // const colors = await screen.findAllByTestId('color')
 
 });

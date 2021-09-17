@@ -22,18 +22,22 @@ const BubblePage = () => {
     axiosWithAuth()
       .put(`/colors/${editColor.id}`, editColor)
       .then(res => {
-        fetchColorService(setColors);
+        setColors(colors.map(item => item.id === editColor.id ? editColor : item))
         setEditing(false)
       })
       .catch(err => console.log(err))
   };
 
+
   const deleteColor = (colorToDelete) => {
     axiosWithAuth()
       .delete(`/colors/${colorToDelete.id}`)
-      .then(res => fetchColorService(setColors))
+      .then(res => {
+        setColors(colors.filter(color => color.id !== colorToDelete.id))
+      })
       .catch(err => console.log(err))
   };
+
 
   return (
     <div className="container">

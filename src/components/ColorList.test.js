@@ -39,7 +39,8 @@ test("Renders a list of colors without errors", () => {
 });
 
 test("Renders the EditForm when editing = true and does not render EditForm when editing = false", () => {
-    // if(editing === 'true') {
-    //     render(<EditMenu />)
-    // }
+    const { rerender } = render(<ColorList colors={testColors} editing={true} />);
+    expect(screen.getByTestId('edit_menu')).toBeInTheDocument();
+    rerender(<ColorList colors={testColors} editing={false} />);
+    expect(screen.queryByTestId('edit_menu')).not.toBeInTheDocument();
 });
