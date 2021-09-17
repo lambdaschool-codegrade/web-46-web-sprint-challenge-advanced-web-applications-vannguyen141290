@@ -3,6 +3,7 @@ import React from 'react';
 const Color = (props) => {
     const {color, setEditColor, toggleEdit, deleteColor} = props;
 
+
     const handleDelete = (e) => {
         e.stopPropagation();
         deleteColor(color);
@@ -20,7 +21,7 @@ const Color = (props) => {
             <span className="delete" data-testid="delete" onClick={handleDelete}>x</span>
             {` ${color.color}`}
         </span>
-        <div 
+        <div
             className="color-box"
             style={{ backgroundColor: color.code.hex }}
         />

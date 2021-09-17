@@ -4,15 +4,27 @@ import BubblePage from "./components/BubblePage";
 
 import Login from "./components/Login";
 import PrivateRoute from './components/PrivateRoute';
+import axiosWithAuth from "./helpers/axiosWithAuth";
 import "./styles.scss";
 
 function App() {
+
+  const logout = () => {
+    axiosWithAuth()
+      .post('/logout')
+      .then(res => {
+        localStorage.removeItem('token');
+        window.location.href = "/login";
+      })
+      .catch(err => console.log(err))
+
+  }
   return (
     <Router>
       <div className="App">
         <header>
           Color Picker Sprint Challenge
-          <a data-testid="logoutButton" href="#">logout</a>
+          <a data-testid="logoutButton" href='#' onClick={logout}>logout</a>
         </header>
       </div>
 
@@ -24,9 +36,8 @@ function App() {
         <Login />
       </Route>
 
-      <PrivateRoute path='/bubbles'>
-        <BubblePage />
-      </PrivateRoute>
+      <PrivateRoute path='/bubbles' component={BubblePage}/>
+
     </Router>
   );
 }
